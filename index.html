@@ -1,2 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warriors Central | Dub Nation</title>
 
-  
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --blue: #061a40;
+    --darkblue: #03112b;
+    --gold: #ffc72c;
+    --white: #ffffff;
+    --gray: #b8c2d1;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--darkblue);
+    color: var(--white);
+    line-height: 1.6;
+}
+
+header {
+    background: var(--blue);
+    padding: 16px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--gold);
+}
+
+.logo {
+    color: var(--gold);
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+nav {
+    display: flex;
+    gap: 22px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+.menu-btn {
+    display: none;
+    color: var(--gold);
+    background: none;
+    border: none;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+.hero {
+    min-height: 570px;
+    display: flex;
+    align-items: center;
+    padding: 70px 9%;
+    background:
+    linear-gradient(90deg, rgba(3,17,43,.96), rgba(3,17,43,.35)),
+    url("https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1800&q=85");
+    background-position: center;
+    background-size: cover;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero h1 {
+    font-size: clamp(42px, 7vw, 75px);
+    line-height: 1.05;
+    margin: 15px 0;
+}
+
+.hero h1 span {
+    color: var(--gold);
+}
+
+.hero p {
+    color: #e1e7f0;
+    font-size: 17px;
+    margin-bottom: 28px;
+}
+
+.tag {
+    color: var(--gold);
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--blue);
+    padding: 13px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn:hover {
+    background: white;
+    transform: translateY(-3px);
+}
+
+section {
+    padding: 85px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title h2 {
+    color: var(--gold);
+    font-size: 35px;
+    margin-bottom: 8px;
+}
+
+.section-title p {
+    color: var(--gray);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    align-items: center;
+}
+
+.about-grid img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.about-text h3 {
+    font-size: 29px;
+    margin-bottom: 15px;
+}
+
+.about-text p {
+    color: var(--gray);
+    margin-bottom: 18px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.stat {
+    background: var(--blue);
+    border: 1px solid #284b79;
+    padding: 20px 10px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.stat h3 {
+    color: var(--gold);
+    font-size: 27px;
+}
+
+.stat p {
+    font-size: 12px;
+    margin: 0;
+}
+
+.players-section {
+    background: #071d42;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.player-controls input,
+.player-controls select {
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #526b91;
+    background: var(--blue);
+    color: white;
+    min-width: 190px;
+}
+
+.player-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.player-card {
+    background: var(--blue);
+    border: 1px solid #284b79;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    transition: .3s;
+}
+
+.player-card:hover {
+    transform: translateY(-7px);
+    border-color: var(--gold);
+}
+
+.player-photo {
+    height: 145px;
+    background: linear-gradient(135deg, #174b8d, #061a40);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 48px;
+    font-weight: 900;
+    border-bottom: 2px solid var(--gold);
+}
+
+.player-info {
+    padding: 18px 10px;
+}
+
+.player-info h3 {
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.player-info p {
+    color: var(--gray);
+    font-size: 13px;
+}
+
+.jersey {
+    color: var(--gold) !important;
+    font-weight: bold;
+    font-size: 16px !important;
+}
+
+.championships {
+    background: var(--darkblue);
+}
+
+.trophy-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.trophy {
+    background: var(--blue);
+    padding: 28px 15px;
+    text-align: center;
+    border-radius: 10px;
+    border-bottom: 3px solid var(--gold);
+}
+
+.trophy .icon {
+    font-size: 35px;
+}
+
+.trophy h3 {
+    color: var(--gold);
+    font-size: 27px;
+    margin: 10px 0;
+}
+
+.trophy p {
+    color: var(--gray);
+    font-size: 13px;
+}
+
+.history-note {
+    color: var(--gray);
+    text-align: center;
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+.gallery {
+    background: #071d42;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.03);
+}
+
+.fan-zone {
+    text-align: center;
+    background:
+    linear-gradient(rgba(3,17,43,.92), rgba(3,17,43,.96)),
+    url("https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&w=1600&q=80") center/cover;
+}
+
+.fan-zone h2 {
+    color: var(--gold);
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.fan-zone p {
+    color: var(--gray);
+}
+
+.vote-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+.vote-buttons button {
+    padding: 13px 20px;
+    background: var(--blue);
+    color: white;
+    border: 1px solid var(--gold);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.vote-buttons button:hover {
+    background: var(--gold);
+    color: var(--blue);
+}
+
+#vote-result {
+    color: var(--gold);
+    font-weight: bold;
+    min-height: 28px;
+}
+
+.contact {
+    text-align: center;
+}
+
+.contact p {
+    color: var(--gray);
+    margin: 10px 0 25px;
+}
+
+footer {
+    background: #020b1c;
+    text-align: center;
+    padding: 30px 15px;
+    border-top: 2px solid var(--gold);
+}
+
+footer h3 {
+    color: var(--gold);
+    margin-bottom: 8px;
+}
+
+footer p {
+    color: var(--gray);
+    font-size: 13px;
+}
+
+.back-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--gold);
+    color: var(--blue);
+    padding: 12px 16px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+@media(max-width: 950px) {
+    .player-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .trophy-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 700px) {
+    header {
+        padding: 15px 5%;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        background: var(--blue);
+        flex-direction: column;
+        padding: 20px;
+        gap: 18px;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .player-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    section {
+        padding: 65px 6%;
+    }
+}
+
+@media(max-width: 430px) {
+    .player-grid,
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trophy-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🏀 WARRIORS CENTRAL</div>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <nav id="navbar">
+        <a href="#home" onclick="closeMenu()">Home</a>
+        <a href="#about" onclick="closeMenu()">About</a>
+        <a href="#players" onclick="closeMenu()">Players</a>
+        <a href="#championships" onclick="closeMenu()">Titles</a>
+        <a href="#gallery" onclick="closeMenu()">Gallery</a>
+        <a href="#fan" onclick="closeMenu()">Fan Zone</a>
+        <a href="#contact" onclick="closeMenu()">Contact</a>
+    </nav>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <p class="tag">WELCOME TO DUB NATION</p>
+        <h1>ONE TEAM.<br><span>ONE FAMILY.</span></h1>
+        <p>
+            Your home for Golden State Warriors basketball.
+            Discover the players, history, championships, and
+            unforgettable moments of the team.
+        </p>
+        <a href="#players" class="btn">MEET THE PLAYERS</a>
+    </div>
+</section>
+
+<section id="about">
+    <div class="section-title">
+        <h2>ABOUT THE WARRIORS</h2>
+        <p>More than basketball. It's a tradition.</p>
+    </div>
+
+    <div class="about-grid">
+        <img
+        src="https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&w=1000&q=85"
+        alt="Basketball court">
+
+        <div class="about-text">
+            <h3>Welcome to Dub Nation</h3>
+            <p>
+                The Golden State Warriors are a professional
+                basketball team based in San Francisco,
+                California. They compete in the NBA's
+                Western Conference.
+            </p>
+            <p>
+                Known for teamwork, exciting basketball,
+                and a strong fan community, the Warriors
+                have created many memorable moments
+                throughout basketball history.
+            </p>
+
+            <div class="stats">
+                <div class="stat">
+                    <h3>7</h3>
+                    <p>NBA TITLES</p>
+                </div>
+                <div class="stat">
+                    <h3>1946</h3>
+                    <p>FOUNDED</p>
+                </div>
+                <div class="stat">
+                    <h3>GSW</h3>
+                    <p>TEAM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="players-section" id="players">
+    <div class="section-title">
+        <h2>MEET THE WARRIORS</h2>
+        <p>Get to know the 2026–27 Golden State Warriors roster.</p>
+    </div>
+
+    <div class="player-controls">
+        <input
+        type="text"
+        id="playerSearch"
+        placeholder="Search player name..."
+        oninput="filterPlayers()">
+
+        <select id="positionFilter" onchange="filterPlayers()">
+            <option value="all">All Positions</option>
+            <option value="Guard">Guards</option>
+            <option value="Forward">Forwards</option>
+            <option value="Center">Centers</option>
+        </select>
+    </div>
+
+    <div class="player-grid" id="playerGrid">
+
+        <div class="player-card" data-name="Stephen Curry" data-position="Guard">
+            <div class="player-photo">SC</div>
+            <div class="player-info"><h3>Stephen Curry</h3><p class="jersey">#30</p><p>Guard</p></div>
+        </div>
+
+        <div class="player-card" data-name="Draymond Green" data-position="Forward">
+            <div class="player-photo">DG</div>
+            <div class="player-info"><h3>Draymond Green</h3><p class="jersey">#23</p><p>Forward-Center</p></div>
+        </div>
+
+        <div class="player-card" data-name="Jimmy Butler III" data-position="Forward">
+            <div class="player-photo">JB</div>
+            <div class="player-info"><h3>Jimmy Butler III</h3><p class="jersey">#10</p><p>Forward</p></div>
+        </div>
+
+        <div class="player-card" data-name="Al Horford" data-position="Center">
+            <div class="player-photo">AH</div>
+            <div class="player-info"><h3>Al Horford</h3><p class="jersey">#20</p><p>Center</p></div>
+        </div>
+
+        <div class="player-card" data-name="Charles Bassey" data-position="Center">
+            <div class="player-photo">CB</div>
+            <div class="player-info"><h3>Charles Bassey</h3><p class="jersey">#28</p><p>Forward-Center</p></div>
+        </div>
+
+        <div class="player-card" data-name="LJ Cryer" data-position="Guard">
+            <div class="player-photo">LC</div>
+            <div class="player-info"><h3>LJ Cryer</h3><p class="jersey">#18</p><p>Guard · Two-Way</p></div>
+        </div>
+
+        <div class="player-card" data-name="Graham Ike" data-position="Center">
+            <div class="player-photo">GI</div>
+            <div class="player-info"><h3>Graham Ike</h3><p class="jersey">#45</p><p>Forward-Center · Two-Way</p></div>
+        </div>
+
+        <div class="player-card" data-name="Yaxel Lendeborg" data-position="Forward">
+            <div class="player-photo">YL</div>
+            <div class="player-info"><h3>Yaxel Lendeborg</h3><p class="jersey">#1</p><p>Forward</p></div>
+        </div>
+
+        <div class="player-card" data-name="Malevy Leons" data-position="Forward">
+            <div class="player-photo">ML</div>
+            <div class="player-info"><h3>Malevy Leons</h3><p class="jersey">#33</p><p>Forward · Two-Way</p></div>
+        </div>
+
+        <div class="player-card" data-name="De'Anthony Melton" data-position="Guard">
+            <div class="player-photo">DM</div>
+            <div class="player-info"><h3>De'Anthony Melton</h3><p class="jersey">#8</p><p>Guard</p></div>
+        </div>
+
+        <div class="player-card" data-name="Moses Moody" data-position="Guard">
+            <div class="player-photo">MM</div>
+            <div class="player-info"><h3>Moses Moody</h3><p class="jersey">#4</p><p>Guard</p></div>
+        </div>
+
+        <div class="player-card" data-name="Georges Niang" data-position="Forward">
+            <div class="player-photo">GN</div>
+            <div class="player-info"><h3>Georges Niang</h3><p class="jersey">#32</p><p>Forward</p></div>
+        </div>
+
+        <div class="player-card" data-name="Gary Payton II" data-position="Guard">
+            <div class="player-photo">GP</div>
+            <div class="player-info"><h3>Gary Payton II</h3><p class="jersey">#0</p><p>Guard</p></div>
+        </div>
+
+        <div class="player-card" data-name="Brandin Podziemski" data-position="Guard">
+            <div class="player-photo">BP</div>
+            <div class="player-info"><h3>Brandin Podziemski</h3><p class="jersey">#2</p><p>Guard</p></div>
+        </div>
+
+        <div class="player-card" data-name="Kristaps Porzingis" data-position="Center">
+            <div class="player-photo">KP</div>
+            <div class="player-info"><h3>Kristaps Porzingis</h3><p class="jersey">#7</p><p>Forward-Center</p></div>
+        </div>
+
+        <div class="player-card" data-name="Will Richard" data-position="Guard">
+            <div class="player-photo">WR</div>
+            <div class="player-info"><h3>Will Richard</h3><p class="jersey">#3</p><p>Guard</p></div>
+        </div>
+
+        <div class="player-card" data-name="Gui Santos" data-position="Forward">
+            <div class="player-photo">GS</div>
+            <div class="player-info"><h3>Gui Santos</h3><p class="jersey">#15</p><p>Forward</p></div>
+        </div>
+
+        <div class="player-card" data-name="Brandon Williams" data-position="Guard">
+            <div class="player-photo">BW</div>
+            <div class="player-info"><h3>Brandon Williams</h3><p class="jersey">#12</p><p>Guard</p></div>
+        </div>
+
+    </div>
+</section>
+
+<section class="championships" id="championships">
+    <div class="section-title">
+        <h2>CHAMPIONSHIP HISTORY</h2>
+        <p>A legacy built through generations of basketball.</p>
+    </div>
+
+    <div class="trophy-grid">
+        <div class="trophy"><div class="icon">🏆</div><h3>1947</h3><p>NBA Champions</p></div>
+        <div class="trophy"><div class="icon">🏆</div><h3>1956</h3><p>NBA Champions</p></div>
+        <div class="trophy"><div class="icon">🏆</div><h3>1975</h3><p>NBA Champions</p></div>
+        <div class="trophy"><div class="icon">🏆</div><h3>2015</h3><p>NBA Champions</p></div>
+        <div class="trophy"><div class="icon">🏆</div><h3>2017</h3><p>NBA Champions</p></div>
+        <div class="trophy"><div class="icon">🏆</div><h3>2018</h3><p>NBA Champions</p></div>
+        <div class="trophy"><div class="icon">🏆</div><h3>2022</h3><p>NBA Champions</p></div>
+    </div>
+
+    <p class="history-note">
+        The 1947 and 1956 titles were won when the franchise
+        was known as the Philadelphia Warriors.
+    </p>
+</section>
+
+<section class="gallery" id="gallery">
+    <div class="section-title">
+        <h2>WARRIORS GALLERY</h2>
+        <p>Basketball, teamwork, and unforgettable moments.</p>
+    </div>
+
+    <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80" alt="Basketball court">
+        <img src="https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&w=800&q=80" alt="Basketball arena">
+        <img src="https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=800&q=80" alt="Basketball game">
+        <img src="https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?auto=format&fit=crop&w=800&q=80" alt="Basketball court action">
+        <img src="https://images.unsplash.com/photo-1515523110800-9415d13b84a8?auto=format&fit=crop&w=800&q=80" alt="Basketball player">
+        <img src="https://images.unsplash.com/photo-1505666287802-931dc83948e9?auto=format&fit=crop&w=800&q=80" alt="Basketball hoop">
+    </div>
+</section>
+
+<section class="fan-zone" id="fan">
+    <h2>JOIN THE DUB NATION!</h2>
+    <p>Who is your favorite Golden State Warriors player?</p>
+
+    <div class="vote-buttons">
+        <button onclick="vote('Stephen Curry')">Stephen Curry</button>
+        <button onclick="vote('Draymond Green')">Draymond Green</button>
+        <button onclick="vote('Jimmy Butler III')">Jimmy Butler</button>
+        <button onclick="vote('Brandin Podziemski')">Brandin Podziemski</button>
+    </div>
+
+    <p id="vote-result">Choose your favorite player!</p>
+</section>
+
+<section class="contact" id="contact">
+    <div class="section-title">
+        <h2>CONTACT</h2>
+        <p>Thank you for visiting Warriors Central!</p>
+    </div>
+
+    <p>A fan-made website dedicated to the Golden State Warriors.</p>
+    <a href="https://www.nba.com/warriors" target="_blank" class="btn">
+        OFFICIAL WARRIORS WEBSITE
+    </a>
+</section>
+
+</main>
+
+<footer>
+    <h3>🏀 WARRIORS CENTRAL</h3>
+    <p>Created by: Your Name</p>
+    <p>Golden State Warriors Fan Website</p>
+    <p>© 2026 Warriors Central. Fan-made educational project.</p>
+</footer>
+
+<a href="#home" class="back-top" aria-label="Back to top">↑</a>
+
+<script>
+function toggleMenu() {
+    document.getElementById("navbar").classList.toggle("active");
+}
+
+function closeMenu() {
+    document.getElementById("navbar").classList.remove("active");
+}
+
+function filterPlayers() {
+    let search = document.getElementById("playerSearch").value.toLowerCase();
+    let position = document.getElementById("positionFilter").value;
+    let cards = document.querySelectorAll(".player-card");
+
+    cards.forEach(function(card) {
+        let name = card.dataset.name.toLowerCase();
+        let playerPosition = card.dataset.position;
+
+        let matchesName = name.includes(search);
+        let matchesPosition =
+            position === "all" || playerPosition === position;
+
+        card.style.display =
+            matchesName && matchesPosition ? "block" : "none";
+    });
+}
+
+function vote(player) {
+    document.getElementById("vote-result").textContent =
+        "Your favorite player is " + player + "! Go Warriors!";
+}
+</script>
+
+</body>
+</html>
+
